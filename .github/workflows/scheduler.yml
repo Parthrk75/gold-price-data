@@ -25,6 +25,6 @@ jobs:
 
     - name: Run update script
       run: |
-        python your_script.py
+        python update_gold_prices.py
       env:
         PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
