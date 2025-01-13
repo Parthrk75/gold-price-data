@@ -29,4 +29,4 @@ jobs:
       - name: Run the script
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Reference the secret here
-        run: python your_script.py
+        run: python update_gold_prices.py
