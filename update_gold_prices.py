@@ -6,6 +6,10 @@ import base64
 import schedule
 import time
 from datetime import datetime
+from flask import Flask, jsonify
+
+# Flask application setup
+app = Flask(__name__)
 
 # GitHub repository details
 GITHUB_REPO = 'Parthrk75/gold-price-data'
@@ -130,13 +134,25 @@ def push_to_github():
     except Exception as e:
         print(f"Error during GitHub push: {e}")
 
-# Main function to schedule the job
-def main():
-    schedule.every().day.at("00:00").do(lambda: (update_csv_file(), push_to_github()))
-    print("Scheduler started. Waiting for the next job...")
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+# Scheduler to run daily tasks
+def run_scheduled_tasks():
+    update_csv_file()
+    push_to_github()
+
+# Flask routes
+@app.route('/')
+def home():
+    return "Gold Price Data Updater is running."
+
+@app.route('/update', methods=['POST'])
+def update():
+    run_scheduled_tasks()
+    return jsonify({"message": "Data updated successfully!"})
 
 if __name__ == '__main__':
-    main()
+    # Optionally, schedule the job
+    schedule.every().day.at("00:00").do(run_scheduled_tasks)
+    print("Scheduler started. Waiting for the next job...")
+
+    # Start Flask app
+    app.run(host='0.0.0.0', port=5000)
