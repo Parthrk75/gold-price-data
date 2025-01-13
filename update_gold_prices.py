@@ -10,7 +10,7 @@ from datetime import datetime
 # GitHub repository details
 GITHUB_REPO = 'Parthrk75/gold-price-data'
 CSV_FILE_PATH = 'historical_gold_spot_prices.csv'
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')  # Ensure token is set as an environment variable
+GITHUB_TOKEN = os.getenv('PERSONAL_ACCESS_TOKEN')  # Ensure token is set as an environment variable
 
 # Retry function for network calls
 def retry(func, retries=3, delay=5):
