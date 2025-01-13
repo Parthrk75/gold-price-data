@@ -28,5 +28,5 @@ jobs:
       # Run the script
       - name: Run the script
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }} # Reference the secret here
         run: python your_script.py
