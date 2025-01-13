@@ -38,10 +38,6 @@ def fetch_data_from_yfinance(ticker, start_date, end_date):
 
 # Function to update the CSV file with the latest data
 def update_csv_file():
-    if not GITHUB_TOKEN:
-        print("Error: GitHub token is missing. Set it as an environment variable.")
-        return
-
     today = datetime.today().strftime('%Y-%m-%d')
     start_date = "2020-01-01"  # Default start date if no data exists
 
@@ -134,25 +130,32 @@ def push_to_github():
     except Exception as e:
         print(f"Error during GitHub push: {e}")
 
-# Scheduler to run daily tasks
-def run_scheduled_tasks():
-    update_csv_file()
-    push_to_github()
-
 # Flask routes
 @app.route('/')
 def home():
     return "Gold Price Data Updater is running."
 
-@app.route('/update', methods=['POST'])
+@app.route('/update', methods=['GET'])
 def update():
-    run_scheduled_tasks()
+    update_csv_file()
+    push_to_github()
     return jsonify({"message": "Data updated successfully!"})
 
-if __name__ == '__main__':
-    # Optionally, schedule the job
-    schedule.every().day.at("00:00").do(run_scheduled_tasks)
-    print("Scheduler started. Waiting for the next job...")
+@app.route('/fetch_data', methods=['GET'])
+def fetch_data():
+    update_csv_file()
+    return jsonify({"message": "Data fetched and CSV updated!"})
 
-    # Start Flask app
+@app.route('/push_to_github', methods=['GET'])
+def push_data():
+    push_to_github()
+    return jsonify({"message": "Data pushed to GitHub successfully!"})
+
+# Scheduler to run daily tasks
+schedule.every().day.at("00:00").do(update_csv_file)
+schedule.every().day.at("00:05").do(push_to_github)
+
+# Start the Flask app
+if __name__ == '__main__':
+    print("Scheduler started. Waiting for the next job...")
     app.run(host='0.0.0.0', port=5000)
