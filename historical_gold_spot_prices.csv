@@ -1,5 +1,4 @@
 Date,Open (Spot Price USD),High (Spot Price USD),Low (Spot Price USD),Close (Spot Price USD),"('Date', '')","('Open (Spot Price USD)', 'GC=F')","('High (Spot Price USD)', 'GC=F')","('Low (Spot Price USD)', 'GC=F')","('Close (Spot Price USD)', 'GC=F')"
-,GC=F,GC=F,GC=F,GC=F,,,,,
 2020-01-02,1518.1,1528.7,1518.0,1524.5,,,,,
 2020-01-03,1530.1,1552.7,1530.1,1549.2,,,,,
 2020-01-06,1580.0,1580.0,1560.4,1566.2,,,,,
@@ -1276,3 +1275,4 @@ Date,Open (Spot Price USD),High (Spot Price USD),Low (Spot Price USD),Close (Spo
 2025-01-23,2760.0,2765.0,2745.4,2763.1,,,,,
 2025-01-24,2759.8,2792.0,2759.8,2777.3,,,,,
 2025-01-28,2742.4,2774.0,2737.4,2771.8,,,,,
+,GC=F,GC=F,GC=F,GC=F,,,,,
